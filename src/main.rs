@@ -1,11 +1,20 @@
-use std::env;
+use std::{env, io, ffi::OsString};
+use args::AppArgs;
+use clap::Parser;
 
-fn main() {
-    let  cdir = env::current_dir();
-    println!("Hello, world!{:?}",cdir);
-    let cargo_home = env::var("CARGO_HOME").unwrap();
-    println!("CARGO_HOME:{:?}",cargo_home);
+pub mod args;
+
+#[tokio::main]
+async fn main()->io::Result<()> {
+    let  args = std::env::args_os();
+    //ArgsOs { inner: ["D:\\chping\\.cargo\\bin\\cargo-zproxy.exe", "zproxy", "-l"] }
+    //解析指令
+    let  mut iter:Vec<OsString> = args.into_iter().collect();
+    if iter.len() > 1 && iter[1] == "zproxy" {
+		iter.remove(1);
+	}
+    //解析指令
+    let app_args= AppArgs::parse_from(iter);
+    app_args.parse_args();
+    Ok(())
 }
-
-
-
