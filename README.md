@@ -18,5 +18,17 @@
 
 - [ ]  7：
 
-## 实现步骤
+## 指令列表
+```shell
+  cargo zproxy  init              执行本地初始化
+  cargo zproxy  auto              评估网络延迟并自动切换到最优的镜像
+  cargo zproxy  use <name>        切换为要使用的镜像
+  cargo zproxy  list              查看当前所有配置的镜像资源地址
+  cargo zproxy  add  -source<XX> --name<XX> -url xxxx
+                                  添加一个镜像进本地配置文件
+  cargo zproxy  sync              同步镜像配置文件
+                  --repo <XX>         设置私有配置仓库
+                  --push          同步镜像配置文件
+  cargo zproxy  version           查看当前版本
+```
 
