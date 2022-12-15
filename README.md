@@ -4,8 +4,11 @@
 
 - [ ]    1：default ：默认create-index
 
-- [ ]    2:   list 所有可用镜像地址---按照网络延
-迟排序
+- [ ]    2:   list 所有可用镜像地址--按照网络延
+  迟排序
+ - - [x] list 所有可用镜像地址
+   - [ ]  按照网络延
+ 迟排序
 
 - [ ] 3:   auto 自动选择最优镜像
 
@@ -16,7 +19,7 @@
 
 - [ ]  6:   sync 地址备份git仓库地址
 
-- [ ]  7：
+- [x]  7： 配置资源初始化
 
 ## 指令列表
 ```shell
@@ -27,7 +30,7 @@
   cargo zproxy  add  -source<XX> --name<XX> -url xxxx
                                   添加一个镜像进本地配置文件
   cargo zproxy  sync              同步镜像配置文件
-                  --repo <XX>         设置私有配置仓库
+                  --repo <XX>     设置私有配置仓库
                   --push          同步镜像配置文件
   cargo zproxy  version           查看当前版本
 ```
