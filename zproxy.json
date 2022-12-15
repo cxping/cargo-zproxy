@@ -1,0 +1,43 @@
+{
+    "version": "1",
+    "default": "crates",
+    "mirrors": [
+        {
+            "name": "crates",
+            "source": "crates-io",
+            "registry": "https://github.com/rust-lang/crates.io-index"
+        },
+        {
+            "name": "清华大学开源软件镜像站",
+            "source": "tuna",
+            "registry": "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+        },
+        {
+            "name": "北京外国语大学开源软件镜像站",
+            "source": "bfsu",
+            "registry": "https://mirrors.bfsu.edu.cn/git/crates.io-index.git"
+        },
+        {
+            "name": "浙江大学开源软件镜像站",
+            "source": "zju",
+            "registry": "https://mirrors.zju.edu.cn/git/crates.io-index.git"
+        },
+        {
+            "name": "哈尔滨工业大学开源软件镜像站",
+            "source": "hit",
+            "registry": "https://mirrors.hit.edu.cn/crates.io-index.git"
+        },
+        {
+            "name": "中科大USTC",
+            "source": "ustc",
+            "registry": "https://mirrors.ustc.edu.cn/crates.io-index"
+        },
+        {
+            "name": "浙江大学开源软件镜像站",
+            "source": "zju",
+            "registry": "https://mirrors.zju.edu.cn/git/crates.io-index.git"
+        }
+    ],
+    "git-fetch-with-cli": "true",
+    "check-revoke": "false"
+}
