@@ -31,13 +31,8 @@
             "name": "中科大USTC",
             "source": "ustc",
             "registry": "https://mirrors.ustc.edu.cn/crates.io-index"
-        },
-        {
-            "name": "浙江大学开源软件镜像站",
-            "source": "zju",
-            "registry": "https://mirrors.zju.edu.cn/git/crates.io-index.git"
         }
     ],
-    "git-fetch-with-cli": "true",
-    "check-revoke": "false"
+    "git_fetch_with_cli": true,
+    "check_revoke": false
 }

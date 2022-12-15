@@ -35,6 +35,7 @@ pub enum Commands {
         #[arg(short, long)]
         url:String,
     },
+    Init,
     //设置同步备份奖项地址
     /// Sync 
     /// -url xxx 设置仓库地址
@@ -45,5 +46,4 @@ pub enum Commands {
         #[arg(short, long)]
         repo:bool,
     }
-
 }
