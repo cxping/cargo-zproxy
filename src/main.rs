@@ -1,8 +1,6 @@
 use args::{process,Commands};
 use clap::Parser;
-use dirs::home_dir;
-use std::{env, ffi::OsString, io::{self,Write,ErrorKind},path::PathBuf,fs::{self,File}};
-use crate::config::ZProxy;
+use std::{ffi::OsString, io};
 
 pub mod args;
 pub mod config;
