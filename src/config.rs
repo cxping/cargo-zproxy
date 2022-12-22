@@ -8,7 +8,10 @@ pub struct ZProxy {
     pub default: String,
     pub mirrors: Vec<Mirror>,
     //其他配置想
+    #[serde(rename(serialize = "git-fetch-with-cli", deserialize = "git_fetch_with_cli"))]
     pub git_fetch_with_cli: bool,
+
+    #[serde(rename(serialize = "check-revoke", deserialize = "check_revoke"))]
     pub check_revoke: bool,
 }
 
@@ -25,17 +28,14 @@ impl ZProxy {
         let file = std::fs::File::open(cnf).unwrap();
         let reader = BufReader::new(file);
         let conf_data: Result<ZProxy, serde_json::Error> = serde_json::from_reader(reader);
-        return match conf_data {
-            Ok(conf) => Some(conf),
-            Err(e) => panic!("{}",e),
-        };
+        conf_data.ok()
     }
 }
 
 impl Default for ZProxy {
       fn default() -> Self {
         ZProxy {
-            version: "0".to_string(),
+            version: "0.0.1".to_string(),
             default: "create-io".to_string(),
             mirrors: vec![
                 Mirror {

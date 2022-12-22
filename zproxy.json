@@ -33,6 +33,6 @@
             "registry": "https://mirrors.ustc.edu.cn/crates.io-index"
         }
     ],
-    "git_fetch_with_cli": true,
-    "check_revoke": false
+    "git-fetch-with-cli": true,
+    "check-revoke": false
 }
