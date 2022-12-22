@@ -182,7 +182,6 @@ fn zproxy_use(name: String, zproxy: ZProxy, cargo_dir: &mut PathBuf) {
         let conf = format!(
             r#"[source.crates-io]
 registry  = 'https://github.com/rust-lang/crates.io-index'
-replace-with = 'crates-io'
 "#);
 match fs::write(&mut *config_file_path, conf) {
     Ok(_) => {
