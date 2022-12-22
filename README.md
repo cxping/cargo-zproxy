@@ -1,5 +1,12 @@
 # 镜像切换工具 
 
+## 安装
+
+```shell
+   cargo install cargo-zproxy
+```
+
+
 目前内置-Github官网索引地址
 
 ```
