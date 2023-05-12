@@ -8,15 +8,22 @@
    #第二步骤初始化代理
    cargo zproxy init
    #第三步骤初始化代理
-   cargo zproxy tuna  
+   cargo zproxy use tuna  
    # 更多仓库镜像，请使用cargo zproxy list 查看可使用的镜像地址
+```
+
+## 如何恢复
+
+```shell
+
+   #恢复官方镜像只需要执行
+   cargo zproxy default
+   
 ```
 
 ## 自定义代理镜像地址。满足需要再特定添加特定的内网镜像源情况
 
 ```shell
-   #恢复官方镜像只需要执行
-   cargo zproxy default
    # 自定义添加镜像地址 例如
     cargo zproxy  add   --name "本地源"  --source  "locality" --url "http://127.0.0.1/crates.io-index"
   #切换本地源
