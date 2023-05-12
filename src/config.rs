@@ -1,4 +1,4 @@
-use std::{io::BufReader, path::PathBuf};
+use std::{io::BufReader, path::PathBuf, fs::File};
 
 use serde::{Deserialize, Serialize};
 
@@ -14,11 +14,19 @@ pub struct ZProxy {
     pub check_revoke: bool,
 }
 
+
+
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Mirror {
     pub name: String,
     pub source: String,
     pub registry: String,
+}
+
+impl  Mirror {
+    pub fn new(name:String,source:String,registry: String)->Self{
+        Self { name,source, registry }
+    }
 }
 
 impl ZProxy {

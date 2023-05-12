@@ -1,10 +1,10 @@
-use crate::config::{self, ZProxy};
+use crate::config::{self, ZProxy, Mirror};
 use clap::Parser;
 use dirs::home_dir;
 use std::{
     env,
     fs::{self, File},
-    io::{ErrorKind, Write},
+    io::{ErrorKind, Write, stdout},
     path::PathBuf,
 };
 
@@ -31,7 +31,7 @@ pub enum Commands {
     ///     -id  xxx
     Use {
         #[arg(short, long)]
-        name: String,
+        source: String,
     },
     /// 手动添加一个地址
     /// add -name xxx -url xxxx
@@ -59,6 +59,7 @@ pub enum Commands {
 pub fn process(cmd: Commands) {
     let mut cargo_dir = cargo_dir();
     let zproxy = read_zproxy(cargo_dir.clone());
+    
     match cmd {
         // list  获取前配置项中镜像仓库
         Commands::List { list: _ } => {
@@ -71,16 +72,24 @@ pub fn process(cmd: Commands) {
             println!("auto 命令暂未实现");
         }
         // Use --name  xxx  切换指定名称得镜像仓库
-        Commands::Use { name } => {
+        Commands::Use { source } => {
             if let Some(z) = zproxy {
-                zproxy_use(name, z, &mut cargo_dir);
+                zproxy_use(source, z, &mut cargo_dir);
             }
         }
         // --name : 镜像名称（非必须）
         // --source: 仓库标识--唯一标识
         // --url : 仓库地址
         Commands::Add { name, url, source } => {
-            println!("add:命令暂未实现,");
+            if url.is_empty() || source.is_empty(){
+                panic!("请添使用cargo zproxy add --help 查看命令帮助信息")
+            }
+
+            if let Some(z) = zproxy {
+                let mirror = Mirror::new(name, source, url);
+                zproxy_add(z,mirror, &mut cargo_dir);
+            }
+    
         }
         // sync 同步镜像配置
         // --url xxx 设置镜像源地址
@@ -104,10 +113,11 @@ fn output_string(index: usize, name: &str, source: &str) {
     if index == 0 {
         println!("以下镜像不分排名先后");
         println!("指定镜像地址use --name  源");
-        println!("索引\t\t\t\t源\t\t\t\t名称");
+        println!("索引(index)\t\t\t\t源(source)\t\t\t\t名称(name)");
     }
     println!("{}\t\t\t\t{}\t\t\t\t{}", index, source, name);
 }
+
 /// 获取cargo安装目录
 fn cargo_dir() -> PathBuf {
     match env::var("CARGO_INSTALL_ROOT")
@@ -256,4 +266,27 @@ fn read_zproxy(cargo_dir: PathBuf) -> Option<ZProxy> {
         }
     };
     config::ZProxy::form_file(&zproxy_conf)
+}
+
+//添加源进入到本地配置文件
+fn zproxy_add(mut zproxy: ZProxy,mirror: Mirror, cargo_dir: &mut PathBuf){
+    let zproxy_conf_path = cargo_dir;
+    zproxy_conf_path.push(".zproxy.json");
+    let mut file = match fs::File::open(&zproxy_conf_path) {
+        Ok(f) => f,
+        Err(_) => panic!("读取本地文件错误"),
+    };
+    zproxy.mirrors.push(mirror);
+    print_list(&zproxy.mirrors);
+    //检查是否已经存在config配置文件，如果存在则需要加载或者覆盖
+    if let Some(conf) = serde_json::to_string(&zproxy).ok() {
+        match file.write_all(conf.as_bytes()) {
+            Ok(()) => {},
+            Err(e) => {
+               println!("文件写入失败：{:?}",e);
+            },
+        }
+    } else {
+        println!("配置文件写入失败")
+    }
 }
