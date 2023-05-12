@@ -16,7 +16,7 @@ name = "cargo-zproxy"
 
 
 [build-dependencies]
-embed-resource = "1.7.3"
+embed-resource = "2.1.1"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -25,7 +25,7 @@ clap = { version = "4.0.29", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1.0.89"
-git2 = "0.15"
-dirs = "4.0"
+git2 = "0.17.1"
+dirs = "5.0.1"
 json = "0.12"
-toml = "0.5"
+toml = "0.7.3"

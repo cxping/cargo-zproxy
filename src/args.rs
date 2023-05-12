@@ -5,7 +5,7 @@ use std::{
     env,
     fs::{self, File},
     io::{ErrorKind, Write, stdout},
-    path::PathBuf,
+    path::{PathBuf, Path},
 };
 
 #[derive(Debug, Clone, Parser)]
@@ -270,11 +270,22 @@ fn read_zproxy(cargo_dir: PathBuf) -> Option<ZProxy> {
 
 //添加源进入到本地配置文件
 fn zproxy_add(mut zproxy: ZProxy,mirror: Mirror, cargo_dir: &mut PathBuf){
+    let mirrors =  zproxy.mirrors.iter().filter(|s|{
+        s.registry.eq(&mirror.registry)
+    }).collect::<Vec<&Mirror>>();
+    if mirrors.len() >=1 {
+        println!("当前源已添加,无需重复添加");
+       return;
+    }
+
     let zproxy_conf_path = cargo_dir;
     zproxy_conf_path.push(".zproxy.json");
-    let mut file = match fs::File::open(&zproxy_conf_path) {
-        Ok(f) => f,
-        Err(_) => panic!("读取本地文件错误"),
+    let  zp_clone  = zproxy_conf_path.clone();
+    let mut file = if Path::new(zproxy_conf_path).exists(){
+        fs::remove_file(zp_clone).unwrap();
+        File::create(&zproxy_conf_path).unwrap()
+    }else{
+         File::create(&zproxy_conf_path).unwrap()
     };
     zproxy.mirrors.push(mirror);
     print_list(&zproxy.mirrors);
