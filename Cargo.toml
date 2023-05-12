@@ -1,6 +1,6 @@
 [package]
 name = "cargo-zproxy"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Chping <chping@iowk.com>"]
 license = "Apache-2.0"
