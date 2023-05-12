@@ -8,7 +8,7 @@
    #第二步骤初始化代理
    cargo zproxy init
    #第三步骤初始化代理
-   cargo zproxy use tuna  
+   cargo zproxy use  --source tuna  
    # 更多仓库镜像，请使用cargo zproxy list 查看可使用的镜像地址
 ```
 
@@ -17,15 +17,15 @@
 ```shell
 
    #恢复官方镜像只需要执行
-   cargo zproxy default
-   
+   cargo zproxy def
+
 ```
 
 ## 自定义代理镜像地址。满足需要再特定添加特定的内网镜像源情况
 
 ```shell
    # 自定义添加镜像地址 例如
-    cargo zproxy  add   --name "本地源"  --source  "locality" --url "http://127.0.0.1/crates.io-index"
+   cargo zproxy  add   --name "本地源"  --source  "locality" --url "http://127.0.0.1/crates.io-index"
   #切换本地源
   cargo zproxy  use --source locality 
 ```
@@ -37,7 +37,11 @@
 ``` shell
 cargo zproxy list #查看已配置镜像源地址内容
 crates.io-index 官网地址
-清华，北京外国语，浙江大学，哈尔滨工业大学等镜像更多使用cargo zproxy list查看
+清华，
+北京外国语，
+浙江大学，
+哈尔滨工业大学等镜像
+更多使用cargo zproxy list查看
 ```
 
 ## 计划实现功能
@@ -52,13 +56,13 @@ crates.io-index 官网地址
 
 - [ ] 4:   auto 自动选择最优镜像
 
-- [ ] 5:   use xxx /default/auto/1
+- [ ] 5:   use  --source xxx /default/auto/1
 
     - [x] 设置默认为creates镜像
     - [x] 支持切换内置的镜像配置
 
-- [ ] 6:   add  手动设置镜像地址
-        -name  xxx  -url=xxxx
+- [x] 6:   add  手动设置镜像地址
+        -source  xxx  -url=xxxx
 
 - [ ] 7:   sync 地址备份git仓库地址
 
