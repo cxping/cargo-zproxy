@@ -1,6 +1,7 @@
 {
     "version": "1",
     "default": "crates",
+    "current":"crates-io",
     "mirrors": [
         {
             "name": "crates",

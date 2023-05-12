@@ -54,6 +54,8 @@ pub enum Commands {
         #[arg(short, long)]
         repo: bool,
     },
+    // def 切换为使用官方默认镜像crates.io
+    Def,
 }
 
 pub fn process(cmd: Commands) {
@@ -100,6 +102,13 @@ pub fn process(cmd: Commands) {
         Commands::Init => {
             zproxy_init(&mut cargo_dir, false);
         }
+
+        Commands::Def=>{
+            if let Some(z) = zproxy {
+                zproxy_use("default".to_owned(), z, &mut cargo_dir)
+            } 
+        },
+    
     };
 }
 
@@ -195,7 +204,7 @@ registry  = 'https://github.com/rust-lang/crates.io-index'
 "#);
 match fs::write(&mut *config_file_path, conf) {
     Ok(_) => {
-        println!("切换成功==>default");
+        println!("切换成功==>default:https://github.com/rust-lang/crates.io-index");
         return;
     }
     Err(e) => {
@@ -250,6 +259,7 @@ fn help() {
                   --repo          设置私有配置仓库
                   --push          同步镜像配置文件
   cargo zproxy  version           查看当前版本
+  cargo zproxy  def               设置默认官方镜像
 "#;
     println!("{}", help);
 }
