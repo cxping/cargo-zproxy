@@ -1,4 +1,4 @@
-use std::{io::BufReader, path::PathBuf, fs::File};
+use std::{io::BufReader, path::PathBuf};
 
 use serde::{Deserialize, Serialize};
 
@@ -37,7 +37,7 @@ impl ZProxy {
         let conf_data: Result<ZProxy, serde_json::Error> = serde_json::from_reader(reader);
         return match conf_data {
             Ok(conf) => Some(conf),
-            Err(e) => {
+            Err(_) => {
                 return None
             },
         };

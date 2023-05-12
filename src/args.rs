@@ -4,7 +4,7 @@ use dirs::home_dir;
 use std::{
     env,
     fs::{self, File},
-    io::{ErrorKind, Write, stdout},
+    io::{ErrorKind, Write},
     path::{PathBuf, Path},
 };
 
@@ -247,7 +247,7 @@ check-revoke =  false
     }
 }
 
-fn help() {
+fn _help() {
     let help = r#"
   cargo zproxy  init              执行本地初始化
   cargo zproxy  auto              评估网络延迟并自动切换到最优的镜像
@@ -270,7 +270,7 @@ fn read_zproxy(cargo_dir: PathBuf) -> Option<ZProxy> {
     zproxy_conf_path.push(".zproxy.json");
     let zproxy_conf = match fs::canonicalize(zproxy_conf_path) {
         Ok(ch) => ch,
-        Err(e) => {
+        Err(_) => {
             //cargo zproxy sync 同步远程镜像配置文件,或者
             return None;
         }
