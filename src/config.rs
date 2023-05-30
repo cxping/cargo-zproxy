@@ -56,6 +56,12 @@ impl Default for ZProxy {
                     registry: "https://github.com/rust-lang/crates.io-index.git".to_string(),
                 },
                 Mirror {
+                    name: "字节代理源".to_string(),
+                    source: "rsproxy".to_string(),
+                    registry: "https://rsproxy.cn/crates.io-index"
+                        .to_string(),
+                },
+                Mirror {
                     name: "清华大学开源软件镜像站".to_string(),
                     source: "tuna".to_string(),
                     registry: "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"

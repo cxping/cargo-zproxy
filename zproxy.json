@@ -9,6 +9,11 @@
             "registry": "https://github.com/rust-lang/crates.io-index"
         },
         {
+            "name": "字节代理源",
+            "source": "rsproxy",
+            "registry": "https://rsproxy.cn/crates.io-index"
+        },
+        {
             "name": "清华大学开源软件镜像站",
             "source": "tuna",
             "registry": "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
