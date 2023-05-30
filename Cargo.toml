@@ -1,11 +1,11 @@
 [package]
 name = "cargo-zproxy"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["Chping <chping@iowk.com>"]
 license = "Apache-2.0"
 description = "Switch warehouse image"
-keywords = ["cargo", "proxy", "zh","subcommand"]
+keywords = ["cargo", "proxy", "rsproxy","subcommand"]
 categories = ["command-line-utilities", "development-tools"]
 build = "build.rs"
 repository = "https://github.com/cxping/cargo-zproxy"
